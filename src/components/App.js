@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import Header from "./Header";
 import Order from "./Order";
 import Inventory from "./Inventory";
@@ -11,6 +12,11 @@ class App extends React.Component {
     fishes: {},
     order: {}
   };
+
+  static propTypes = {
+    match: PropTypes.object
+  };
+
   componentDidMount() {
     const { params } = this.props.match;
     const localStorageRef = localStorage.getItem(params.storeId);
@@ -24,9 +30,7 @@ class App extends React.Component {
   }
   
   componentDidUpdate() {
-    console.log(this.state.order)
     localStorage.setItem(this.props.match.params.storeId, JSON.stringify(this.state.order));
-    console.log('it updated')
   }
   
   componentWillUnmount() {
